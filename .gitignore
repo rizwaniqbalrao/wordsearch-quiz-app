@@ -1,3 +1,7 @@
+# Keystore files (keep private, never commit)
+*.jks
+*.keystore
+
 # Miscellaneous
 *.class
 *.log
