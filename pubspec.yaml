@@ -1,5 +1,5 @@
 name: wordsearch_quiz
-description: "Word Search Quiz - Play 1,918+ word search puzzles across 25 categories"
+description: "Word Search Quiz - Play 2,092+ word search puzzles across 25 categories"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -17,6 +17,7 @@ dependencies:
   share_plus: ^10.1.4
   confetti: ^0.7.0
   collection: ^1.18.0
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

@@ -100,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               child: const Icon(Icons.search_rounded, size: 48, color: AppColors.purple),
                             ),
                             const SizedBox(height: 16),
-                            Text('Search 1,918+ puzzles', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey.shade600)),
+                            Text('Search 2,092+ puzzles', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.grey.shade600)),
                           ],
                         ),
                       )

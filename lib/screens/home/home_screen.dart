@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             const Text(
-                              '1,918+',
+                              '2,092+',
                               style: TextStyle(
                                 fontSize: 42,
                                 fontWeight: FontWeight.w900,

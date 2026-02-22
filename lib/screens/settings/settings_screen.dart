@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wordsearch_quiz/providers/stats_provider.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -96,7 +97,7 @@ class SettingsScreen extends StatelessWidget {
                       icon: Icons.grid_view_rounded,
                       iconColor: const Color(0xFF22c55e),
                       title: 'Total Puzzles',
-                      trailing: '1,918',
+                      trailing: '2,092',
                     ),
                     const Divider(height: 1),
                     _InfoTile(
@@ -108,36 +109,42 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                _SectionHeader(title: 'Legal'),
+                _SectionHeader(title: 'Legal & Support'),
                 _SettingsCard(
                   children: [
                     _NavTile(
                       icon: Icons.privacy_tip_outlined,
                       iconColor: const Color(0xFF6366f1),
                       title: 'Privacy Policy',
-                      onTap: () => _showLegalDialog(
-                        context,
-                        'Privacy Policy',
-                        _privacyPolicyText,
-                      ),
+                      onTap: () => _launchUrl('https://www.wordsearchquiz.com/privacy'),
                     ),
                     const Divider(height: 1),
                     _NavTile(
                       icon: Icons.description_outlined,
                       iconColor: const Color(0xFF8b5cf6),
                       title: 'Terms of Service',
-                      onTap: () => _showLegalDialog(
-                        context,
-                        'Terms of Service',
-                        _termsOfServiceText,
-                      ),
+                      onTap: () => _launchUrl('https://www.wordsearchquiz.com/terms'),
+                    ),
+                    const Divider(height: 1),
+                    _NavTile(
+                      icon: Icons.support_agent_rounded,
+                      iconColor: const Color(0xFF22c55e),
+                      title: 'Contact Support',
+                      onTap: () => _launchUrl('https://www.wordsearchquiz.com/contact'),
+                    ),
+                    const Divider(height: 1),
+                    _NavTile(
+                      icon: Icons.language_rounded,
+                      iconColor: const Color(0xFF06b6d4),
+                      title: 'Visit Website',
+                      onTap: () => _launchUrl('https://www.wordsearchquiz.com'),
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
                 Center(
                   child: Text(
-                    'WordSearchQuiz © 2025\nAll 1,918 puzzles · Play offline · Free',
+                    'WordSearchQuiz © 2025\nAll 2,092 puzzles · Play offline · Free',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,
@@ -155,67 +162,12 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showLegalDialog(BuildContext context, String title, String content) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(child: Text(content)),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
   }
-
-  static const _privacyPolicyText = '''
-Privacy Policy for WordSearchQuiz
-Last Updated: January 2025
-
-1. Information We Collect
-   We do NOT collect personal information. Anonymous usage data may be stored locally for app improvement. All game progress is stored only on your device.
-
-2. How We Use Information
-   App usage data is used solely to improve the gameplay experience. We do not share data with third parties.
-
-3. Data Storage
-   All game data is stored locally on your device. No cloud synchronization. Data is deleted when the app is uninstalled.
-
-4. Children's Privacy
-   This app is suitable for ages 4+. We do not knowingly collect data from children.
-
-5. Contact
-   Website: https://www.wordsearchquiz.com
-''';
-
-  static const _termsOfServiceText = '''
-Terms of Service for WordSearchQuiz
-Last Updated: January 2025
-
-1. Acceptance of Terms
-   By using this app, you agree to these terms.
-
-2. License to Use App
-   You are granted a non-exclusive, non-transferable license to use the app for personal, non-commercial purposes.
-
-3. User Conduct
-   You agree not to reverse engineer, copy, or redistribute the app or its content.
-
-4. Intellectual Property
-   All puzzles, content, and code are owned by WordSearchQuiz.
-
-5. Disclaimer of Warranties
-   The app is provided "as is" without warranties of any kind.
-
-6. Limitation of Liability
-   WordSearchQuiz shall not be liable for any indirect or incidental damages.
-
-7. Contact
-   Website: https://www.wordsearchquiz.com
-''';
 }
 
 class _SectionHeader extends StatelessWidget {
